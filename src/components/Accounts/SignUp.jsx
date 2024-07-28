@@ -33,16 +33,10 @@ const Signup = () => {
         body: JSON.stringify({ email, password, firstName, lastName }),
       });
 
-
-
       const data = await response.json();
-      console.log(data,"data")
       if (response.ok) {
-        // Handle successful login (e.g., store token, redirect to dashboard)
-        console.log('Login successful', data);
         navigate('/login')
       } else {
-        // Handle error response
         setError(data.message || 'Something went wrong');
       }
     } catch (err) {
@@ -62,7 +56,6 @@ const Signup = () => {
         },
         body: JSON.stringify({ token }),
       });
-      console.log(response)
       if (!response.ok) {
         throw new Error('Failed to authenticate');
       }
@@ -71,7 +64,6 @@ const Signup = () => {
 
       const data = await response.json();
 
-      console.log('User authenticated:', data);
       if(data.jwttoken) {
         navigate('/')
         localStorage.setItem('token', data.jwttoken);

@@ -29,8 +29,6 @@ const Login = () => {
             const data = await response.json();
 
             if (response.ok) {
-                // Handle successful login (e.g., store token, redirect to dashboard)
-                console.log('Login successful', data);
                 navigate('/')
                 toast.success("You are logged in");
             } else {
@@ -56,14 +54,12 @@ const Login = () => {
                 },
                 body: JSON.stringify({ token }),
             });
-            console.log(response)
             if (!response.ok) {
                 throw new Error('Failed to authenticate');
             }
 
             const data = await response.json();
 
-            console.log('User authenticated:', data);
             if (data.token) {
                 navigate('/')
                 toast.success("Welcome to drag-drop");
