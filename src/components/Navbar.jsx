@@ -1,21 +1,46 @@
+import React, { useState, useEffect } from 'react';
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ToastContainer, toast } from 'react-toastify';
-
-const navigation = [
-  { name: 'Logout', href: '/login', current: true },
-];
+import { useNavigate } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-const handleLogout = () =>{
-  localStorage.removeItem('token')
-  toast.success("Logout successfully");
-}
-
 const Navbar = () => {
+  const [login, setLogin] = useState('Login');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setLogin('Logout');
+    } else {
+      setLogin('Login');
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setLogin('Login');
+    toast.success("Logged out successfully");
+    navigate('/login');
+  };
+
+  const handleLoginLogoutClick = () => {
+    if (login === 'Logout') {
+      handleLogout();
+    } else {
+      navigate('/login');
+    }
+  };
+
+  const navigation = [
+    { name: login, href: '#', current: true },
+  ];
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -37,7 +62,7 @@ const Navbar = () => {
                   key={item.name}
                   href={item.href}
                   aria-current={item.current ? 'page' : undefined}
-                  onClick={handleLogout}
+                  onClick={handleLoginLogoutClick}
                   className={classNames(
                     item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                     'rounded-md px-3 py-2 text-sm font-medium'
@@ -96,6 +121,7 @@ const Navbar = () => {
               as="a"
               href={item.href}
               aria-current={item.current ? 'page' : undefined}
+              onClick={handleLoginLogoutClick}
               className={classNames(
                 item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                 'block rounded-md px-3 py-2 text-base font-medium'
