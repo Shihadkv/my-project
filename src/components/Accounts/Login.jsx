@@ -32,7 +32,6 @@ const Login = () => {
                 navigate('/')
                 toast.success("You are logged in");
             } else {
-                // Handle error response
                 setError(data.message || 'Something went wrong');
             }
         } catch (err) {
@@ -42,7 +41,6 @@ const Login = () => {
         }
     };
 
-    // const notify = () => toast("Wow so easy!");
 
     const handleLoginSuccess = async (credentialResponse) => {
         const token = credentialResponse.credential;

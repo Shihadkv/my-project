@@ -7,7 +7,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-// className="h-screen w-full bg-neutral-900 text-neutral-50"
 const App = () => {
   return (
     <Router>
