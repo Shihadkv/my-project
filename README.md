@@ -12,6 +12,8 @@ Currently, two official plugins are available:
 
 
 # DRAG AND DROP
+![image](https://github.com/user-attachments/assets/6851ce6c-2d1f-4313-b1f4-18c6cc7b60c7)
+
 
 This repository contains the frontend code for a modern web application. The project is built using React and features animations and interactions powered by Framer Motion.
 
